@@ -67,18 +67,25 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CustomCard(
-                        modifier = Modifier.fillMaxWidth(0.8f),
-                        image = R.drawable.imagen15,
-                        title = "DECIDIR",
-                        text = "- Desearía que no hubiese ocurrido en mi época -dijo Frodo.\n" +
-                                "- Y yo -respondió Gandalf-, y también todos los que han vivido para ver unos tiempos como estos. Pero no les toca a ellos decidir. Lo único que debemos decidir es qué hacer con el tiempo que nos es dado.",
-                        publisher = Publisher(
-                            author = "J.R.R. Tolkien",
-                            book = "El Señor de los Anillos",
-                            image = R.drawable.tolkien
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(Color.Black.copy(alpha = 0.8f)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        CustomCard(
+                            modifier = Modifier.fillMaxWidth(0.8f),
+                            image = R.drawable.imagen15,
+                            title = "DECIDIR",
+                            text = "- Desearía que no hubiese ocurrido en mi época -dijo Frodo.\n" +
+                                    "- Y yo -respondió Gandalf-, y también todos los que han vivido para ver unos tiempos como estos. Pero no les toca a ellos decidir. Lo único que debemos decidir es qué hacer con el tiempo que nos es dado.",
+                            publisher = Publisher(
+                                author = "J.R.R. Tolkien",
+                                book = "El Señor de los Anillos",
+                                image = R.drawable.tolkien
+                            )
                         )
-                    )
+                    }
                 }
             }
         }
@@ -109,7 +116,7 @@ fun CustomCard(
                     .height(200.dp),
                 painter = painterResource(id = image),
                 contentDescription = null,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 colorFilter = ColorFilter.colorMatrix(
                     ColorMatrix().apply {
                         setToSaturation(0f)
@@ -126,7 +133,7 @@ fun CustomCard(
                 Text(
                     text = title,
                     color = Color.White,
-                    fontSize = 18.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.Medium
                 )
 
@@ -145,7 +152,7 @@ fun CustomCard(
                         },
                     text = text,
                     color = Color.White.copy(alpha = 0.6f),
-                    fontSize = 16.sp,
+                    fontSize = 12.sp,
                     fontWeight = FontWeight.Normal,
                     fontFamily = FontFamily.Serif,
                     maxLines = if (showFullText) 10 else 2,
@@ -170,7 +177,7 @@ fun CustomCard(
                         withStyle(
                             SpanStyle(
                                 color = Color.White,
-                                fontSize = 16.sp,
+                                fontSize = 12.sp,
                                 fontStyle = FontStyle.Italic
                             )
                         ) {
@@ -180,7 +187,7 @@ fun CustomCard(
                         withStyle(
                             SpanStyle(
                                 color = Color.White.copy(alpha = 0.5f),
-                                fontSize = 14.sp,
+                                fontSize = 12.sp,
                             )
                         ) {
                             append(publisher.book)
