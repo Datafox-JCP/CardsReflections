@@ -54,6 +54,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import mx.datafox.cardsreflections.ui.theme.CardsReflectionsTheme
@@ -70,6 +71,7 @@ data class Quote(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             CardsReflectionsTheme {
                 Surface(
@@ -243,7 +245,7 @@ fun getRandomQuote(): Quote {
         ),
         Quote(
             "PRESENTE",
-            "Si estás deprimido, vives en el pasado. Si estás inquieto, vives en el futuro. Si estás en paz, vives en el presente",
+            "Si estás deprimido, vives en el pasado. Si estás inquieto, vives en el futuro. Si estás en paz, vives en el presente.",
             "Lao Tse",
             "",
             R.drawable.imagen2,
@@ -275,7 +277,7 @@ fun getRandomQuote(): Quote {
         ),
         Quote(
             "ADVERSIDAD",
-            "Algunas ocasiones tus mayores fortalezas son tus mayores debilidades. Algunas ocaiones de las grandes adversidades, es de donde aprendes mas.",
+            "Algunas ocasiones tus mayores fortalezas son tus mayores debilidades. Algunas ocasiones de las grandes adversidades, es de donde aprendes mas.",
             "Steve Jobs",
             "Make Something Wonderful",
             R.drawable.imagen6,
@@ -291,15 +293,15 @@ fun getRandomQuote(): Quote {
         ),
         Quote(
             "SUCESOS",
-            "No nos afecta lo que nos sucede, sino lo que nos decíamos acerca de lo que nos sucede.",
+            "No nos afecta lo que nos sucede, sino lo que nos decimos acerca de lo que nos sucede.",
             "Epicteto",
-            "Rompe la barrera del no",
+            "",
             R.drawable.imagen8,
             R.drawable.epicteto
         ),
         Quote(
             "PROPOSITO",
-            "La vida nunca es insoportable pora las circunstancias, sino por la falta de significado y propósito.",
+            "La vida nunca es insoportable por las circunstancias, sino por la falta de significado y propósito.",
             "Victor Frankl",
             "El sentido de la vida",
             R.drawable.imagen9,
@@ -320,6 +322,14 @@ fun getRandomQuote(): Quote {
             "",
             R.drawable.imagen11,
             R.drawable.churchill
+        ),
+        Quote(
+            "CONFIANZA",
+            "La falta de confianza mata más sueños que la falta de habilidad.",
+            "James Clear",
+            "Hábitos Atómicos",
+            R.drawable.imagen12,
+            R.drawable.clear
         ),
         Quote(
             "CONFIANZA",
