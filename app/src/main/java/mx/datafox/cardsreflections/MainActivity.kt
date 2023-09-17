@@ -27,9 +27,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,19 +44,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -80,7 +83,7 @@ class MainActivity : ComponentActivity() {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color.Black.copy(alpha = 0.8f)),
+                            .background(Color.Black.copy(alpha = 0.7f)),
                         contentAlignment = Alignment.Center
                     ) {
                         RandomQuoteCard()
@@ -93,13 +96,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun RandomQuoteCard() {
+    val state = rememberScrollState()
     var quote by remember { mutableStateOf(getRandomQuote()) }
     val coroutineScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .verticalScroll(state),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -148,8 +153,8 @@ fun QuoteCardContent(
                     .fillMaxWidth()
                     .height(200.dp),
                 painter = painterResource(id = quote.cardImage),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+                contentDescription = quote.title,
+                contentScale = ContentScale.Crop,
 //                colorFilter = ColorFilter.colorMatrix(
 //                    ColorMatrix().apply {
 //                        setToSaturation(0f)
@@ -166,8 +171,13 @@ fun QuoteCardContent(
                 Text(
                     text = quote.title,
                     color = Color.White,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.Medium
+                    style = MaterialTheme.typography.headlineSmall.copy(
+                        shadow = Shadow(
+                            color = Color.White,
+                            offset = Offset(2f, 2f),
+                            blurRadius = 8f
+                        )
+                    )
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -184,11 +194,10 @@ fun QuoteCardContent(
                             showFullText = !showFullText
                         },
                     text = quote.text,
-                    color = Color.White.copy(alpha = 0.6f),
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight.Normal,
+                    color = Color.White.copy(alpha = 0.8f),
+                    style = MaterialTheme.typography.bodyLarge,
                     fontFamily = FontFamily.Serif,
-                    maxLines = if (showFullText) 10 else 2,
+                    maxLines = if (showFullText) 14 else 2,
                     overflow = TextOverflow.Ellipsis
                 )
 
@@ -197,7 +206,7 @@ fun QuoteCardContent(
                 Row {
                     Image(
                         modifier = Modifier
-                            .size(42.dp)
+                            .size(60.dp)
                             .clip(CircleShape),
                         painter = painterResource(id = quote.authorImage),
                         contentDescription = null,
@@ -210,7 +219,7 @@ fun QuoteCardContent(
                         withStyle(
                             SpanStyle(
                                 color = Color.White,
-                                fontSize = 12.sp,
+                                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
                                 fontStyle = FontStyle.Italic
                             )
                         ) {
@@ -219,8 +228,8 @@ fun QuoteCardContent(
                         append("\n")
                         withStyle(
                             SpanStyle(
-                                color = Color.White.copy(alpha = 0.5f),
-                                fontSize = 12.sp,
+                                color = Color.White.copy(alpha = 0.7f),
+                                fontSize = MaterialTheme.typography.bodySmall.fontSize,
                             )
                         ) {
                             append(quote.book)
@@ -252,7 +261,7 @@ fun getRandomQuote(): Quote {
             R.drawable.lao_tse
         ),
         Quote(
-            "FRUSTRACION",
+            "EXCELENCIA",
             "Lidiar con la frustración pasajera de no lograr ningún progreso forma parte del camino hacia la excelencia.",
             "Tim Ferris",
             "Armas de titanes",
@@ -260,7 +269,7 @@ fun getRandomQuote(): Quote {
             R.drawable.ferris
         ),
         Quote(
-            "CAMBIO",
+            "ENFOQUE",
             "Si quieres hacer un cambio permanente, deja de enfocarte en el tamaño de tus problemas y enfócate en el tamaño de tu ser.",
             "T. Harv Eker",
             "Secretos de la Mente Millonaria",
@@ -317,7 +326,7 @@ fun getRandomQuote(): Quote {
         ),
         Quote(
             "CORAJE",
-            "El éxito no es final; fracasar no es fatal: Es el coraje para continuar lo que cuenta.",
+            "Un éxito nunca es definitivo, un fracaso nunca es fatídico, lo que cuenta es el coraje.",
             "Winston Churchill",
             "",
             R.drawable.imagen11,
@@ -332,13 +341,125 @@ fun getRandomQuote(): Quote {
             R.drawable.clear
         ),
         Quote(
-            "CONFIANZA",
-            "La falta de confianza mata más sueños que la falta de habilidad.",
-            "James Clear",
-            "Hábitos Atómicos",
-            R.drawable.imagen12,
-            R.drawable.clear
-        )
+            "ATENCIÓN",
+            "Los demás no piensan tanto en nosotros como creemos, ni siquiera cuando somos el centro de atención.",
+            "Amy Cuddy",
+            "El poder de la presencia",
+            R.drawable.imagen13,
+            R.drawable.cuddy
+        ),
+        Quote(
+            "SEGURIDAD",
+            "Un individuo seguro -que conoce su identidad y cree en ella, lleva consigo herramientas en lugar de armas. No necesita quedar por encima de los demás. Cuando crees de verdadd -en ti, en tus ideas-, no te sientes amenzado, sino seguro.",
+            "Amy Cuddy",
+            "El poder de la presencia",
+            R.drawable.imagen13,
+            R.drawable.cuddy
+        ),
+        Quote(
+            "SER",
+            "No lo finjas hasta conseguirlo, fíngelo hasta serlo.",
+            "Amy Cuddy",
+            "El poder de la presencia",
+            R.drawable.imagen14,
+            R.drawable.cuddy
+        ),
+        Quote(
+            "HASTA EL ANOCHECER",
+            "Cualquiera puede llevar una carga, por pesada que sea, hasta el anochecer. Cualquiera puede hacer su trabajo, por duro que sea, durante el día. Cualquiera puede llever una vida dulce, paciente, amorosa y pura hasta la puesta del sol. Y esto es todo cuanto la vida significa realmente",
+            "Robert Louis Stevenson",
+            "",
+            R.drawable.imagen15,
+            R.drawable.stevenson
+        ),
+        Quote(
+            "NO RENDIRSE",
+            "Estar a la altura de la situación no tenía nada que ver con el talento. Lo más importate para no tirar la toalla era la actitud de <<no rendirse nunca>>.",
+            "Amy Cuddy",
+            "GRIT",
+            R.drawable.imagen16,
+            R.drawable.cuddy
+        ),
+        Quote(
+            "PERSEVERANCIA",
+            "Aquello que alcanzamos en la vida depende más de nuestra pasión y persverancia que de nuestro talento natural.",
+            "Angela Duckworth",
+            "GRIT",
+            R.drawable.imagen17,
+            R.drawable.duckworth
+        ),
+        Quote(
+            "OPORTUNIDADES",
+            "Aprovecha los errores y problemas como oportunidades para mejorar y no como razones para desistir.",
+            "Angela Duckworth",
+            "GRIT",
+            R.drawable.imagen18,
+            R.drawable.duckworth
+        ),
+        Quote(
+            "SUFRIMIENTO",
+            "No es el sufrimiento lo que lleva a la desesperanza, sino el sufrimiento que creemos no poder controlar.",
+            "Angela Duckworth",
+            "GRIT",
+            R.drawable.imagen19,
+            R.drawable.duckworth
+        ),
+        Quote(
+            "CUALIDADES",
+            "Apunta hacia arriba. Presta atención. Arregla lo que puedas arreglar. No seas arrogante. Esfuérzate por ser humilde. No mientas por nada nunca y sobre todo no te mientas a ti.",
+            "Jordan B. Peterson",
+            "12 Reglas para vivir",
+            R.drawable.imagen20,
+            R.drawable.peterson
+        ),
+        Quote(
+            "CARIÑO",
+            "Cuando quieres a alguien, no es a pesar de sus limitaciones, sino a causa de ellas.",
+            "Jordan B. Peterson",
+            "12 Reglas para vivir",
+            R.drawable.imagen21,
+            R.drawable.peterson
+        ),
+        Quote(
+            "VIVIR",
+            "Quien tiene un porqué para vivir encontrará casi siempre el cómo.",
+            "Jordan B. Peterson",
+            "El ocaso de los ídolos",
+            R.drawable.imagen22,
+            R.drawable.nietzsche
+        ),
+        Quote(
+            "RESPONSABILIDAD",
+            "No eres responsable de la mano de cartas que te han repartido. Eres responsable de sacar el máximo de lo que te ha tocado.",
+            "Tim Ferris",
+            "Armas de titanes",
+            R.drawable.imagen23,
+            R.drawable.ferris
+        ),
+        Quote(
+            "ESTRATEGÍA",
+            "La esperanza no es una estrategía. La suerte no es un factor. El miedo no es una opción.",
+            "Tim Ferris",
+            "Armas de titanes",
+            R.drawable.imagen24,
+            R.drawable.ferris
+        ),
+        Quote(
+            "INTENTAR",
+            "¡No lo intentes! Hazlo o no lo hagas. No vale intentar.",
+            "Yoda",
+            "Star Wars (Episode V",
+            R.drawable.imagen25,
+            R.drawable.yoda
+        ),
+        Quote(
+            "PERDER",
+            "Está bien perder con el oponente. No perder ante el miedo.",
+            "Pat Morita (Señor Miyagi)",
+            "The Karate Kid III",
+            R.drawable.imagen26,
+            R.drawable.morita
+        ),
     )
 
     return quotes.random()
