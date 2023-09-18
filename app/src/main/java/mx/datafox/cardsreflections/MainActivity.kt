@@ -422,9 +422,9 @@ fun getRandomQuote(): Quote {
         ),
         Quote(
             "VIVIR",
-            "Quien tiene un porqué para vivir encontrará casi siempre el cómo.",
-            "Jordan B. Peterson",
-            "El ocaso de los ídolos",
+            "Aque que tiene un porqué por el cual vividr, puede soportar caso cualquier cómo.",
+            "Friedrich Nietzche",
+            "",
             R.drawable.imagen22,
             R.drawable.nietzsche
         ),
@@ -448,7 +448,7 @@ fun getRandomQuote(): Quote {
             "INTENTAR",
             "¡No lo intentes! Hazlo o no lo hagas. No vale intentar.",
             "Yoda",
-            "Star Wars (Episode V",
+            "Star Wars (Episode V)",
             R.drawable.imagen25,
             R.drawable.yoda
         ),
@@ -459,6 +459,38 @@ fun getRandomQuote(): Quote {
             "The Karate Kid III",
             R.drawable.imagen26,
             R.drawable.morita
+        ),
+        Quote(
+            "HÁBITOS",
+            "Todas las cosas importantes provienen de comienzos modestos. La semilla de cada hábito es una pequeña decisión.",
+            "James Clear",
+            "Hábitos atómicos",
+            R.drawable.imagen27,
+            R.drawable.clear
+        ),
+        Quote(
+            "ESPERANZA",
+            "Al principio la esperanza es todo lo que tienes.",
+            "James Clear",
+            "Hábitos atómicos",
+            R.drawable.imagen28,
+            R.drawable.clear
+        ),
+        Quote(
+            "CLARIDAD",
+            "Muchas veces, lo que parece resistencia es falta de claridad.",
+            "Chip Heath & Dan Heath",
+            "Cambia el chip",
+            R.drawable.imagen29,
+            R.drawable.chip
+        ),
+        Quote(
+            "PERDER",
+            "Los grandes cambios proceden de una sucesión de pequeños cambios",
+            "Chip Heath & Dan Heath",
+            "Cambia el chip",
+            R.drawable.imagen30,
+            R.drawable.chip
         ),
     )
 
