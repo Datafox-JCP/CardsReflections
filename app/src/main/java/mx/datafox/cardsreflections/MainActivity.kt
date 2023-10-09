@@ -1,6 +1,7 @@
 package mx.datafox.cardsreflections
 
 import android.os.Bundle
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
@@ -74,20 +75,17 @@ data class Quote(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         installSplashScreen()
         setContent {
             CardsReflectionsTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(Color.Black.copy(alpha = 0.7f)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        RandomQuoteCard()
-                    }
+                    RandomQuoteCard()
                 }
             }
         }
@@ -100,35 +98,49 @@ fun RandomQuoteCard() {
     var quote by remember { mutableStateOf(getRandomQuote()) }
     val coroutineScope = rememberCoroutineScope()
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(state),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(Color.Black.copy(alpha = 0.7f)),
+        contentAlignment = Alignment.Center
     ) {
-        AnimatedVisibility(
-            visible = true,
-            enter = fadeIn(animationSpec = tween(durationMillis = 300, easing = LinearOutSlowInEasing)),
-            exit = fadeOut(animationSpec = tween(durationMillis = 300))
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(state),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Crossfade(targetState = quote, label = "ChangeQuote") { currentQuote ->
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            coroutineScope.launch(Dispatchers.Default) {
-                                quote = getRandomQuote()
+            AnimatedVisibility(
+                visible = true,
+                enter = fadeIn(
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = LinearOutSlowInEasing
+                    )
+                ),
+                exit = fadeOut(animationSpec = tween(durationMillis = 300))
+            ) {
+                Crossfade(targetState = quote, label = "ChangeQuote") { currentQuote ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                coroutineScope.launch(Dispatchers.Default) {
+                                    quote = getRandomQuote()
+                                }
                             }
-                        }
-                        .animateContentSize()
-                ) {
-                    QuoteCardContent(quote = currentQuote)
+                            .animateContentSize(),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.Black
+                        )
+                    ) {
+                        QuoteCardContent(quote = currentQuote)
+                    }
                 }
-                
-            }
 
+            }
         }
     }
 }
@@ -141,15 +153,9 @@ fun QuoteCardContent(
 
     var showFullText by remember { mutableStateOf(false) }
 
-    Card(
-        modifier = modifier.animateContentSize(),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.Black
-        )
-    ) {
-        Column {
+    Column {
             Image(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxWidth()
                     .height(200.dp),
                 painter = painterResource(id = quote.cardImage),
@@ -163,7 +169,7 @@ fun QuoteCardContent(
             )
 
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .padding(
                         vertical = 20.dp,
                         horizontal = 15.dp)
@@ -180,10 +186,10 @@ fun QuoteCardContent(
                     )
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = modifier.height(8.dp))
 
                 Text(
-                    modifier = Modifier
+                    modifier = modifier
                         .animateContentSize(
                             animationSpec = spring(
                                 dampingRatio = Spring.DampingRatioLowBouncy,
@@ -201,11 +207,11 @@ fun QuoteCardContent(
                     overflow = TextOverflow.Ellipsis
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = modifier.height(20.dp))
 
                 Row {
                     Image(
-                        modifier = Modifier
+                        modifier = modifier
                             .size(60.dp)
                             .clip(CircleShape),
                         painter = painterResource(id = quote.authorImage),
@@ -213,7 +219,7 @@ fun QuoteCardContent(
                         contentScale = ContentScale.Crop
                     )
 
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = modifier.width(10.dp))
 
                     val annotatedString = buildAnnotatedString {
                         withStyle(
@@ -239,7 +245,6 @@ fun QuoteCardContent(
                 }
             }
         }
-    }
 }
 
 fun getRandomQuote(): Quote {
@@ -366,7 +371,7 @@ fun getRandomQuote(): Quote {
         ),
         Quote(
             "HASTA EL ANOCHECER",
-            "Cualquiera puede llevar una carga, por pesada que sea, hasta el anochecer. Cualquiera puede hacer su trabajo, por duro que sea, durante el día. Cualquiera puede llever una vida dulce, paciente, amorosa y pura hasta la puesta del sol. Y esto es todo cuanto la vida significa realmente",
+            "Cualquiera puede llevar una carga, por pesada que sea, hasta el anochecer. Cualquiera puede hacer su trabajo, por duro que sea, durante el día. Cualquiera puede llever una vida dulce, paciente, amorosa y pura hasta la puesta del sol. Y esto es todo cuanto la vida significa realmente.",
             "Robert Louis Stevenson",
             "",
             R.drawable.imagen15,
@@ -422,7 +427,7 @@ fun getRandomQuote(): Quote {
         ),
         Quote(
             "VIVIR",
-            "Aque que tiene un porqué por el cual vividr, puede soportar caso cualquier cómo.",
+            "Aquel que tiene un porqué por el cual vivir, puede soportar cualquier cosa.",
             "Friedrich Nietzche",
             "",
             R.drawable.imagen22,
