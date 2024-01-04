@@ -9,8 +9,10 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -107,6 +109,7 @@ fun RandomQuoteCard() {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun QuoteCardContent(
     modifier: Modifier = Modifier,
@@ -138,7 +141,11 @@ fun QuoteCardContent(
         ){
             Text(
                 text = quote.title,
+                maxLines = 1,
+                modifier = Modifier
+                    .basicMarquee(),
                 color = Color.White,
+                fontFamily = FontFamily.Serif,
                 style = MaterialTheme.typography.headlineSmall.copy(
                     shadow = Shadow(
                         color = Color.White,
@@ -163,8 +170,8 @@ fun QuoteCardContent(
                     },
                 text = quote.text,
                 color = Color.White.copy(alpha = 0.8f),
-                style = MaterialTheme.typography.bodyLarge,
-                fontFamily = FontFamily.Serif,
+                style = MaterialTheme.typography.bodyMedium,
+                fontFamily = FontFamily.SansSerif,
                 maxLines = if (showFullText) 14 else 2,
                 overflow = TextOverflow.Ellipsis
             )
@@ -197,7 +204,7 @@ fun QuoteCardContent(
                     withStyle(
                         SpanStyle(
                             color = Color.White.copy(alpha = 0.7f),
-                            fontSize = MaterialTheme.typography.bodySmall.fontSize,
+                            fontSize = MaterialTheme.typography.bodySmall.fontSize
                         )
                     ) {
                         append(quote.book)
