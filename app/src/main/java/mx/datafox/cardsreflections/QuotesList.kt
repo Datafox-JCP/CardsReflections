@@ -3,7 +3,7 @@ package mx.datafox.cardsreflections
 val quotes = arrayOf(
     Quote(
         "Decisiones",
-        "- Desearía que no hubiese ocurrido en mi época -dijo Frodo. - Y yo -respondió Gandalf-, y también todos los que han vivido para ver unos tiempos como estos. Pero no les toca a ellos decidir. Lo único que debemos decidir es qué hacer con el tiempo que nos es dado.",
+        "- Desearía que no hubiese ocurrido en mi época -dijo Frodo. - Y yo -respondió Gandalf-, y también todos los que han vivido para ver unos tiempos como estos. Pero no les toca a ellos decidir.\n" + "\n" + "Lo único que debemos decidir es qué hacer con el tiempo que nos es dado.",
         "J.R.R. Tolkien",
         "El Señor de los Anillos",
         R.drawable.imagen1,
@@ -202,8 +202,8 @@ val quotes = arrayOf(
         R.drawable.ferris
     ),
     Quote(
-        "No vale intentar",
-        "¡No lo intentes! Hazlo o no lo hagas. No vale intentar.",
+        "No intentes",
+        "¡No, no intentes! Hazlo o déjalo. No hay intentos.",
         "Yoda",
         "Star Wars (Episode V)",
         R.drawable.imagen25,
@@ -218,7 +218,7 @@ val quotes = arrayOf(
         R.drawable.morita
     ),
     Quote(
-        "Pequeña decisió",
+        "Pequeña decisión",
         "Todas las cosas importantes provienen de comienzos modestos. La semilla de cada hábito es una pequeña decisión.",
         "James Clear",
         "Hábitos atómicos",
@@ -274,20 +274,12 @@ val quotes = arrayOf(
         R.drawable.streisand
     ),
     Quote(
-        "Me volviste oscuridad",
-        "Que no te espante mi maldad, si mi maestro fuiste tú; si me volviste oscuridad, cada centímetro de luz.",
-        "Erika Ender",
-        "Ataúd",
-        R.drawable.imagen26,
-        R.drawable.ender
-    ),
-    Quote(
         "Código Jedi",
         "No hay emoción, hay paz.\n" +
                 "No hay ignorancia, hay conocimiento. \n" +
                 "No hay pasión, hay serenidad.\n" +
                 "No hay caos, hay armonía.",
-        "George Lucas?",
+        "",
         "",
         R.drawable.imagen32,
         R.drawable.yoda
@@ -315,8 +307,40 @@ val quotes = arrayOf(
         "No me puedes dañar",
         R.drawable.imagen33,
         R.drawable.goggins
+    ),
+    Quote(
+        "Desaprender lo aprendido",
+        "El progreso requiere desaprender lo aprendido. Para lograr ser la mejor versión de ti mismo, es necesario que edites constantemente tus creencias y que actualices y expandas tu identidad.",
+        "James Clear",
+        "Hábitos atómicos",
+        R.drawable.imagen2,
+        R.drawable.clear
+    ),
+    Quote(
+        "Convertirte en la persona que eres",
+        "El proceso de construcción de hábitos equivale en realidad al proceso de convertirte en la persona que eres.",
+        "James Clear",
+        "Hábitos atómicos",
+        R.drawable.imagen20,
+        R.drawable.clear
     )
 )
 fun getRandomQuote(): Quote {
     return quotes.random()
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

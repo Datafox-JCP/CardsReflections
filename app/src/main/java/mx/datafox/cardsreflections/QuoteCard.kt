@@ -52,6 +52,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -172,7 +173,7 @@ fun QuoteCardContent(
                 color = Color.White.copy(alpha = 0.8f),
                 style = MaterialTheme.typography.bodyMedium,
                 fontFamily = FontFamily.SansSerif,
-                maxLines = if (showFullText) 14 else 2,
+                maxLines = if (showFullText) 20 else 3,
                 overflow = TextOverflow.Ellipsis
             )
 
@@ -214,4 +215,10 @@ fun QuoteCardContent(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun QuoteCardPreview() {
+    RandomQuoteCard()
 }

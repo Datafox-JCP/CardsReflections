@@ -1,5 +1,6 @@
 package mx.datafox.cardsreflections
 
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -37,7 +38,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     RandomQuoteCard()
-//                    QuotesListScreen()
                 }
             }
         }
@@ -56,7 +56,9 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Preview(showBackground = true, showSystemUi = true, backgroundColor = 0xFF000000)
+@Preview(showBackground = true, showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 fun GreetingPreview() {
     CardsReflectionsTheme {
