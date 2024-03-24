@@ -28,8 +28,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,10 +47,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
@@ -59,6 +69,14 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun RandomQuoteCard() {
+    val gradientColorList = listOf(
+        Color(0xFF000000),
+        Color(0xFF311B92),
+        Color(0xFF4527A0),
+        Color(0xFF010E70),
+        Color(0xFF020A5E)
+    )
+
     val state = rememberScrollState()
     var quote by remember { mutableStateOf(getRandomQuote()) }
     val coroutineScope = rememberCoroutineScope()
@@ -66,7 +84,13 @@ fun RandomQuoteCard() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black.copy(alpha = 0.7f)),
+//            .background(Color.Black.copy(alpha = 0.7f)),
+            .background(
+                brush = gradientBackgroundBrush(
+                    isVerticalGradient = true,
+                    colors = gradientColorList
+                )
+            ),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -98,13 +122,12 @@ fun RandomQuoteCard() {
                             }
                             .animateContentSize(),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color.Black
+                            containerColor = Color.Black.copy(alpha = 0.6f)
                         )
                     ) {
                         QuoteCardContent(quote = currentQuote)
                     }
                 }
-
             }
         }
     }
@@ -117,44 +140,68 @@ fun QuoteCardContent(
     quote: Quote
 ) {
 
+    val context = LocalContext.current
     var showFullText by remember { mutableStateOf(false) }
+    var isFavorite by remember { mutableStateOf(FavoritesManager.isFavorite(context, quote.id)) }
 
     Column {
         Image(
             modifier = modifier
-                .fillMaxWidth()
-                .height(200.dp),
+                .fillMaxWidth(),
             painter = painterResource(id = quote.cardImage),
             contentDescription = quote.title,
-            contentScale = ContentScale.Crop,
-//                colorFilter = ColorFilter.colorMatrix(
-//                    ColorMatrix().apply {
-//                        setToSaturation(0f)
-//                    }
-//                )
+            contentScale = ContentScale.Fit
         )
 
         Column(
             modifier = modifier
                 .padding(
                     vertical = 20.dp,
-                    horizontal = 15.dp)
-        ){
-            Text(
-                text = quote.title,
-                maxLines = 1,
-                modifier = Modifier
-                    .basicMarquee(),
-                color = Color.White,
-                fontFamily = FontFamily.Serif,
-                style = MaterialTheme.typography.headlineSmall.copy(
-                    shadow = Shadow(
-                        color = Color.White,
-                        offset = Offset(2f, 2f),
-                        blurRadius = 8f
+                    horizontal = 8.dp
+                )
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = {
+                        isFavorite = !isFavorite
+                        if (isFavorite) {
+                            FavoritesManager.markAsFavorite(context, quote.id)
+                        } else {
+                            FavoritesManager.removeAsFavorite(context, quote.id)
+                        }
+                    },
+                    modifier = Modifier
+                        .size(24.dp)
+                ) {
+                    Icon(
+                        imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                        contentDescription = if (isFavorite) stringResource(R.string.remove_from_favorites) else stringResource(
+                            R.string.add_to_favorites
+                        ),
+                        tint = Color.Red.copy(0.5f)
+                    )
+                }
+
+                Text(
+                    text = quote.title,
+                    maxLines = 1,
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 8.dp)
+                        .basicMarquee(),
+                    color = Color.White,
+                    fontFamily = FontFamily.Serif,
+                    style = MaterialTheme.typography.headlineSmall.copy(
+                        shadow = Shadow(
+                            color = Color.White,
+                            offset = Offset(2f, 2f),
+                            blurRadius = 8f
+                        )
                     )
                 )
-            )
+            }
 
             Spacer(modifier = modifier.height(8.dp))
 
@@ -185,8 +232,13 @@ fun QuoteCardContent(
                         .size(60.dp)
                         .clip(CircleShape),
                     painter = painterResource(id = quote.authorImage),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
+                    contentDescription = stringResource(R.string.author_picture),
+                    contentScale = ContentScale.Crop,
+                    colorFilter = ColorFilter.colorMatrix(
+                        ColorMatrix().apply {
+                            setToSaturation(0f)
+                        }
+                    )
                 )
 
                 Spacer(modifier = modifier.width(10.dp))
@@ -215,6 +267,25 @@ fun QuoteCardContent(
             }
         }
     }
+}
+
+@Composable
+fun gradientBackgroundBrush(
+    isVerticalGradient: Boolean,
+    colors: List<Color>
+): Brush {
+
+    val endOffset = if (isVerticalGradient) {
+        Offset(x = 0F, Float.POSITIVE_INFINITY)
+    } else {
+        Offset(Float.POSITIVE_INFINITY, y = 0F)
+    }
+
+    return Brush.linearGradient(
+        colors = colors,
+        start = Offset.Zero,
+        end = endOffset
+    )
 }
 
 @Preview

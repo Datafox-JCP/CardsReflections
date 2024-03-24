@@ -13,7 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.google.android.play.core.review.ReviewManagerFactory
 import mx.datafox.cardsreflections.ui.theme.CardsReflectionsTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,8 +29,6 @@ class MainActivity : ComponentActivity() {
             )
         )
 
-        showFeedbackDialog()
-
         setContent {
             CardsReflectionsTheme {
                 Surface(
@@ -39,16 +36,6 @@ class MainActivity : ComponentActivity() {
                 ) {
                     RandomQuoteCard()
                 }
-            }
-        }
-    }
-
-    private fun showFeedbackDialog() {
-        val reviewManager = ReviewManagerFactory.create(applicationContext)
-
-        reviewManager.requestReviewFlow().addOnCompleteListener {
-            if (it.isSuccessful) {
-                reviewManager.launchReviewFlow(this, it.result)
             }
         }
     }
