@@ -277,7 +277,7 @@ val quotes = arrayOf(
         "Los grandes cambios proceden de una sucesión de pequeños cambios.",
         "Chip Heath & Dan Heath",
         "Cambia el chip",
-        R.drawable.imagen32,
+        R.drawable.imagen31,
         R.drawable.chip
     ),
     Quote(
@@ -286,7 +286,7 @@ val quotes = arrayOf(
         "No te detengas cuando estés cansado. Detente cuando hayas terminado.",
         "David Goggins",
         "No me puedes dañar",
-        R.drawable.imagen33,
+        R.drawable.imagen32,
         R.drawable.goggins
     ),
     Quote(
@@ -295,7 +295,7 @@ val quotes = arrayOf(
         "Cuando somos abatidos por los dramas de vivir, grandes y pequeños, estamos olvidando que no importa qué tan fuerte sea el dolor, no importa qué tan horrorosa sea la tortura, todas las cosas malas terminan.",
         "David Goggins",
         "No me puedes dañar",
-        R.drawable.imagen34,
+        R.drawable.imagen33,
         R.drawable.goggins
     ),
     Quote(
@@ -304,7 +304,7 @@ val quotes = arrayOf(
         "If you can imagine it, then you can achieve it, but it might take a lot of time, it might take a lot of hard work. If you want something you’ve never had, you have to do something you’ve never done.",
         "Barbra Straisand",
         "Climb every mountain",
-        R.drawable.imagen35,
+        R.drawable.imagen34,
         R.drawable.streisand
     ),
     Quote(
@@ -317,7 +317,7 @@ val quotes = arrayOf(
                 "No hay muerte, hay esperanza",
         "",
         "",
-        R.drawable.imagen36,
+        R.drawable.imagen35,
         R.drawable.yoda
     ),
     Quote(
@@ -326,7 +326,7 @@ val quotes = arrayOf(
         "When I’m good, I’m very good, but when I’m bad, I’m better.",
         "Rebecca Ferguson",
         "",
-        R.drawable.imagen37,
+        R.drawable.imagen36,
         R.drawable.rebeccaf
     ),
     Quote(
@@ -343,7 +343,7 @@ val quotes = arrayOf(
                 "¡Supéralo!",
         "David Goggins",
         "No me puedes dañar",
-        R.drawable.imagen38,
+        R.drawable.imagen37,
         R.drawable.goggins
     ),
     Quote(
@@ -352,7 +352,7 @@ val quotes = arrayOf(
         "El progreso requiere desaprender lo aprendido. Para lograr ser la mejor versión de ti mismo, es necesario que edites constantemente tus creencias y que actualices y expandas tu identidad.",
         "James Clear",
         "Hábitos atómicos",
-        R.drawable.imagen39,
+        R.drawable.imagen38,
         R.drawable.clear
     ),
     Quote(
@@ -361,7 +361,7 @@ val quotes = arrayOf(
         "El proceso de construcción de hábitos equivale en realidad al proceso de convertirte en la persona que eres.",
         "James Clear",
         "Hábitos atómicos",
-        R.drawable.imagen40,
+        R.drawable.imagen39,
         R.drawable.clear
     ),
     Quote(
@@ -370,16 +370,16 @@ val quotes = arrayOf(
         "Brick walls are there for a reason. The brick walls are not there to keep us out. The brick walls are there to show how badly we want something. Because the brick walls are there to stop the people who don't want something badly enough.",
         "Randy Pausch",
         "The Last Lecture",
-        R.drawable.imagen41,
+        R.drawable.imagen40,
         R.drawable.pausch
     ),
     Quote(
         41,
         "Triunfo del mal",
-        "Lo único que necesita el mal para triunfar es que los hombres buenos no hagan nada",
+        "Lo único que necesita el mal para triunfar es que los hombres buenos no hagan nada.",
         "Edmund Burk",
         "",
-        R.drawable.imagen42,
+        R.drawable.imagen41,
         R.drawable.burke
     ),
     Quote(
@@ -388,9 +388,121 @@ val quotes = arrayOf(
         "Any fool can know. The point is to understand.",
         "Albert Einstein",
         "",
-        R.drawable.imagen43,
+        R.drawable.imagen42,
         R.drawable.einstein
-    )
+    ),
+    Quote(
+        43,
+        "Diseña tu mundo",
+        "Sé el diseñador de tu mundo y no solamente un consumidor de él.",
+        "James Clear",
+        "Hábitos Atómicos",
+        R.drawable.imagen43,
+        R.drawable.clear
+    ),
+    Quote(
+        44,
+        "Respeto",
+        "El respeto se gana cada día al levantarte temprano, retándote con nuevos sueños o desenterrando viejas pesadillas y aceptando con los brazos abiertos lo que esté jodido como si no tuvieras nada ni nunca hubieras hecho una maldita cosa en tu vida.",
+        "David Goggins",
+        "Nunca Terminar",
+        R.drawable.imagen44,
+        R.drawable.goggins
+    ),
+    Quote(
+        45,
+        "Fall down and get up",
+        "It’s not about winning. It’s about how many times you fall down and get up and fight for what you believe. It’s about hard work. And passion.",
+        "Lady Gaga",
+        "",
+        R.drawable.imagen45,
+        R.drawable.gaga
+    ),
+    Quote(
+        46,
+        "Mind over matter",
+        "Age is an issue of mind over matter. If you don't mind, it doesn't matter.",
+        "Mark Twain",
+        "",
+        R.drawable.imagen46,
+        R.drawable.twain
+    ),
+    Quote(
+        47,
+        "Best years of your life",
+        "The best years of your life are the ones in which you decide your problems are your own. You do not blame them on your mother, the ecology, or the president. You realize that you control your own destiny.",
+        "Mark Twain",
+        "",
+        R.drawable.imagen47,
+        R.drawable.ellis
+    ),
+    Quote(
+        48,
+        "Never lie, steal, cheat or drink.",
+        "Never lie, steal, cheat or drink. \n" +
+                "But if you must lie, lie in the arms of the one you love. \n" +
+                "If you must steal, steal away from bad company.\n" +
+                "If you must cheat, cheat death...\n" +
+                "and if you must drink, drink in the moments that take your breath away.",
+        "Will Smith",
+        "Hitch, especialista en seducción",
+        R.drawable.imagen48,
+        R.drawable.willsmith
+    ),
+    Quote(
+        49,
+        "Las cosas que hacemos",
+        "No puede haber felicidad si las cosas que creemos son distintas de las cosas que hacemos.",
+        "Freya Stark",
+        "",
+        R.drawable.imagen49,
+        R.drawable.freya
+    ),
+    Quote(
+        50,
+        "Hasta que no empieces a tener fe en ti, no tendras una vida",
+        "El mundo no es un arcoiris y nubes rosas. Es un lugar malo y muy salvaje y no importa que tan rudo seas, te pondrá de rodillas y te dejará ahí permanentemente si  lo dejas. Ni tú, ni yo ni nadie golpeará tan duro como la vida pero no importa que tan duro lo hagas, importa lo duro que resistas y sigas avanzando, así es como se gana. Y si sabes cuánto vales, sal a buscar lo que mereces; pero debes ir dispuesto a que te den golpes y no a culpar a otros y decir no soy lo que quiero ser por él o ella o por nadie. Hasta que no empieces a tener fe en ti, no tendras una vida.",
+        "Sylvester Stallone",
+        "Rocky Balboa",
+        R.drawable.imagen50,
+        R.drawable.stallone
+    ),
+    Quote(
+        51,
+        "Oración",
+        "Señor, protégenos a mi familia y a mí. Perdona mis pecados y ayúdame a mantenerme a salvo del orgullo y el desánimo. Dame la sabiduría necesaria para hacer lo que es correcto y justo. Conviérteme en un instrumento de tu voluntad.",
+        "Barak Obama",
+        "Una tierra prometida",
+        R.drawable.imagen51,
+        R.drawable.obama
+    ),
+    Quote(
+        52,
+        "Roadblocks",
+        "If you're trying to achieve, there will be roadblocks. I've had them; everybody has had them. But obstacles don't have to stop you. If you run into a wall, don't turn around and give up. Figure out how to climb it, go through it, or work around it.",
+        "Michael Jordan",
+        "",
+        R.drawable.imagen52,
+        R.drawable.jordan
+    ),
+    Quote(
+        53,
+        "Cárcel",
+        "No hay peor cárcel que la que fabricamos para nosotros mismos con nuestros prejuicios, costumbres, miedos, envidias y pereza.",
+        "Elsa Punset",
+        "El mundo en tus manos",
+        R.drawable.imagen53,
+        R.drawable.punset
+    ),
+    Quote(
+        54,
+        "Oración de la Serenidad",
+        "Dios, concédeme la serenidad para aceptar las cosas que no puedo cambiar, el valor para cambiar las cosas que puedo cambiar y la sabiduría para conocer la diferencia; viviendo un día a la vez, disfrutando un momento a la vez; aceptando las adversidades como un camino hacia la paz; pidiendo, como lo hizo Dios, en este mundo pecador tal y como es, y no como me gustaría que fuera; creyendo que Tú harás que todas las cosas estén bien si yo me entrego a Tu voluntad; de modo que pueda ser razonablemente feliz en esta vida e increíblemente feliz Contigo en la siguiente. Amen.",
+        "Anónimo",
+        "",
+        R.drawable.imagen54,
+        R.drawable.punset
+    ),
 )
 fun getRandomQuote(): Quote {
     return quotes.random()

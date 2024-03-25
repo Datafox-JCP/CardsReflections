@@ -1,6 +1,5 @@
 package mx.datafox.cardsreflections
 
-import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -43,9 +42,7 @@ class MainActivity : ComponentActivity() {
 
 
 
-@Preview(showBackground = true, showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES
-)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     CardsReflectionsTheme {

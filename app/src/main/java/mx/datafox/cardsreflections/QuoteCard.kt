@@ -1,5 +1,6 @@
 package mx.datafox.cardsreflections
 
+import android.content.Intent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.animateContentSize
@@ -30,6 +31,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -70,7 +72,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun RandomQuoteCard() {
     val gradientColorList = listOf(
-        Color(0xFF000000),
+        Color(0xFF020A5E),
         Color(0xFF311B92),
         Color(0xFF4527A0),
         Color(0xFF010E70),
@@ -78,13 +80,14 @@ fun RandomQuoteCard() {
     )
 
     val state = rememberScrollState()
-    var quote by remember { mutableStateOf(getRandomQuote()) }
     val coroutineScope = rememberCoroutineScope()
+
+    var quote by remember { mutableStateOf(getRandomQuote()) }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-//            .background(Color.Black.copy(alpha = 0.7f)),
+//            .background(Color.Black.copy(alpha = 0.8f)),
             .background(
                 brush = gradientBackgroundBrush(
                     isVerticalGradient = true,
@@ -111,7 +114,10 @@ fun RandomQuoteCard() {
                 ),
                 exit = fadeOut(animationSpec = tween(durationMillis = 300))
             ) {
-                Crossfade(targetState = quote, label = "ChangeQuote") { currentQuote ->
+                Crossfade(
+                    targetState = quote,
+                    label = "ChangeQuote"
+                ) { currentQuote ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -141,6 +147,14 @@ fun QuoteCardContent(
 ) {
 
     val context = LocalContext.current
+    val quoteShare = "\"${quote.text}\" - ${quote.author}"
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_TEXT, quoteShare)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null)
+
     var showFullText by remember { mutableStateOf(false) }
     var isFavorite by remember { mutableStateOf(FavoritesManager.isFavorite(context, quote.id)) }
 
@@ -213,9 +227,7 @@ fun QuoteCardContent(
                             stiffness = Spring.StiffnessLow
                         )
                     )
-                    .clickable {
-                        showFullText = !showFullText
-                    },
+                    .clickable { showFullText = !showFullText },
                 text = quote.text,
                 color = Color.White.copy(alpha = 0.8f),
                 style = MaterialTheme.typography.bodyMedium,
@@ -264,6 +276,22 @@ fun QuoteCardContent(
                     }
                 }
                 Text(text = annotatedString)
+
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.End
+                ){
+                    IconButton(onClick = { context.startActivity(shareIntent) }) {
+                        Icon(
+                            imageVector = Icons.Filled.Share,
+                            contentDescription = "Share",
+                            modifier = Modifier
+                                .size(25.dp),
+                            tint = Color.LightGray
+                        )
+                    }
+                }
             }
         }
     }
@@ -288,7 +316,7 @@ fun gradientBackgroundBrush(
     )
 }
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun QuoteCardPreview() {
     RandomQuoteCard()
